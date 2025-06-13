@@ -1,20 +1,20 @@
 import os.path
 
 def get_files_info(working_directory, directory=None):
-    not_dir_error = f'Error: "{directory}" is not a directory'
-    outside_scope_error = f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
+    DIR_ERROR = f'Error: "{directory}" is not a directory'
+    SCOPE_ERROR = f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
 
     if directory is None:
-        return not_dir_error
+        return DIR_ERROR
 
     path = os.path.join(working_directory, directory)
     if path.endswith('.'):
         path = path[:-1]
 
     if not os.path.isdir(path):
-        return not_dir_error
+        return DIR_ERROR
     if not os.path.abspath(path).startswith(os.path.abspath(working_directory)):
-        return outside_scope_error
+        return SCOPE_ERROR
 
     path_content = os.listdir(path)
     content = ""
