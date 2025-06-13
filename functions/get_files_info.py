@@ -6,12 +6,14 @@ def get_files_info(working_directory, directory=None):
 
     if directory is None:
         return not_dir_error
-    if directory.startswith('../') or directory.startswith('/'):
-            return outside_scope_error
 
     path = os.path.join(working_directory, directory)
     if path.endswith('.'):
         path = path[:-1]
+
+    if not os.path.abspath(path).startswith(os.path.abspath(working_directory)):
+        return outside_scope_error
+
     is_dir = os.path.isdir(path)
     is_file = os.path.isfile(path)
     if is_dir:
