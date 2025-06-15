@@ -18,7 +18,7 @@ def run_python_file(working_directory, file_path):
         if process.returncode != 0:
             code = f'Process exited with code {process.returncode}\n'
             return f'{file_path}\n' + output + error + code
-        return f'{file_path}\n' + output + error
+        return f'{file_path}\n' + output
     except subprocess.CalledProcessError as e:
         return f'Error: executing Python file: {str(e)}'
 
